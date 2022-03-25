@@ -10,23 +10,38 @@ The script has been modified to be able to start on 8 GB (the default starting R
 
 The script can be slow to get going, but it'll get there eventually. Getting access to more port hackers will improve the performance.
 
-## Instalation
+## Installation
 
-1. Create a new script called `start.ns` by issuing the following command: `nano start.ns`. Make sure you're on your home server if you're not (you can quickly go home by running `home` in the console).
+1. Create a new script called `start.js` by issuing the following command: `nano start.js`. Make sure you're on your home server if you're not (you can quickly go home by running `home` in the console).
 2. Paste the following content:
 
 ```javascript
-export async function main(ns) {
-  if (ns.getHostname() !== "home") {
-    throw new Exception("Run the script from home");
-  }
+/**
+* @param {NS} ns
+**/
 
-  await ns.wget(
-    `https://raw.githubusercontent.com/moriakaice/bitburner/master/src/initHacking.ns?ts=${new Date().getTime()}`,
-    "initHacking.ns"
-  );
-  ns.spawn("initHacking.ns", 1);
+function localeHHMMSS(ms = 0) {
+	if (!ms) {
+		ms = new Date().getTime()
+	}
+
+	return new Date(ms).toLocaleTimeString()
+}
+
+export async function main(ns) {
+	if (ns.getHostname() !== "home") {
+		throw new Exception("Run the script from home");
+	}
+
+	ns.tprint(`[${localeHHMMSS()}] Trying to download initHacking.js`);
+
+	await ns.wget(
+		`https://raw.githubusercontent.com/TimKue/bitburner/master/src/initHacking.js?ts=${new Date().getTime()}`,
+		"initHacking.js"
+	);
+	ns.tprint(`[${localeHHMMSS()}] Starting initHacking.js`)
+	ns.spawn("initHacking.js", 1);
 }
 ```
 
-3. Exit the nano and write in console: `run start.ns`
+3. Exit the nano and write in console: `run start.js`
