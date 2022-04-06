@@ -104,8 +104,8 @@ async function getHackableServers(ns, servers) {
         }
       })
       ns.nuke(hostname)
-      ns.connect(hostname)
-      ns.installBackdoor()
+      //ns.connect(hostname)
+      //ns.installBackdoor()
     }
 
     await ns.scp(hackScripts, hostname)
