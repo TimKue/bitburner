@@ -249,11 +249,11 @@ export async function main(ns) {
           continue
         }
 
-        if (growCycles) {
+        /*if (growCycles) {
           await ns.exec('grow.js', server.host, cyclesToRun, bestTarget, cyclesToRun, growDelay, createUUID())
           growCycles -= cyclesToRun
           cyclesFittable -= cyclesToRun
-        }
+        }*/
 
         if (cyclesFittable) {
           await ns.exec('weaken.js', server.host, cyclesFittable, bestTarget, cyclesFittable, 0, createUUID())
